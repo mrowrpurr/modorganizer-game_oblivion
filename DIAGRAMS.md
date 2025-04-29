@@ -92,7 +92,7 @@ The following diagram shows which features are implemented specifically for Obli
 
 ```mermaid
 flowchart TD
-    subgraph Custom Implementations
+    subgraph CustomImplementations[Custom Implementations]
         OblivionBSAInvalidation
         OblivionDataArchives
         OblivionModDataChecker
@@ -101,15 +101,15 @@ flowchart TD
         OblivionScriptExtender
     end
     
-    subgraph Direct Gamebryo Usage
+    subgraph DirectGamebryoUsage[Direct Gamebryo Usage]
         GamebryoGamePlugins
         GamebryoLocalSaveGames
         GamebryoSaveGameInfo
         GamebryoUnmanagedMods
     end
     
-    GameOblivion --> Custom Implementations
-    GameOblivion --> Direct Gamebryo Usage
+    GameOblivion --> CustomImplementations
+    GameOblivion --> DirectGamebryoUsage
 ```
 
 ## Oblivion Plugin Architecture
@@ -118,12 +118,12 @@ The following diagram shows the overall architecture of the Oblivion plugin:
 
 ```mermaid
 flowchart TD
-    subgraph Mod Organizer 2
+    subgraph ModOrganizer2[Mod Organizer 2]
         IPluginGame
         IOrganizer
     end
     
-    subgraph Gamebryo Framework
+    subgraph GamebryoFramework[Gamebryo Framework]
         GameGamebryo
         GamebryoBSAInvalidation
         GamebryoDataArchives
@@ -137,7 +137,7 @@ flowchart TD
         GamebryoUnmanagedMods
     end
     
-    subgraph Oblivion Plugin
+    subgraph OblivionPlugin[Oblivion Plugin]
         GameOblivion
         OblivionBSAInvalidation
         OblivionDataArchives
@@ -147,22 +147,22 @@ flowchart TD
         OblivionScriptExtender
     end
     
-    IPluginGame <-- implements --> GameGamebryo
-    GameGamebryo <-- extends --> GameOblivion
+    IPluginGame --- GameGamebryo
+    GameGamebryo --- GameOblivion
     
-    GamebryoBSAInvalidation <-- extends --> OblivionBSAInvalidation
-    GamebryoDataArchives <-- extends --> OblivionDataArchives
-    GamebryoModDataChecker <-- extends --> OblivionModDataChecker
-    GamebryoModDataContent <-- extends --> OblivionModDataContent
-    GamebryoSaveGame <-- extends --> OblivionSaveGame
-    GamebryoScriptExtender <-- extends --> OblivionScriptExtender
+    GamebryoBSAInvalidation --- OblivionBSAInvalidation
+    GamebryoDataArchives --- OblivionDataArchives
+    GamebryoModDataChecker --- OblivionModDataChecker
+    GamebryoModDataContent --- OblivionModDataContent
+    GamebryoSaveGame --- OblivionSaveGame
+    GamebryoScriptExtender --- OblivionScriptExtender
     
-    GameOblivion -- uses --> GamebryoGamePlugins
-    GameOblivion -- uses --> GamebryoLocalSaveGames
-    GameOblivion -- uses --> GamebryoSaveGameInfo
-    GameOblivion -- uses --> GamebryoUnmanagedMods
+    GameOblivion --- GamebryoGamePlugins
+    GameOblivion --- GamebryoLocalSaveGames
+    GameOblivion --- GamebryoSaveGameInfo
+    GameOblivion --- GamebryoUnmanagedMods
     
-    IOrganizer -- provides --> GameOblivion
+    IOrganizer --- GameOblivion
 ```
 
 ## Initialization Flow
